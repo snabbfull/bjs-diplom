@@ -1,29 +1,27 @@
 "use strict";
 
-const myUserForm = new UserForm();
+const userForm = new UserForm();
 
-myUserForm.loginFormCallback = (data) => {
+//Форма для ввода логина
+
+userForm.loginFormCallback = (data) => {
   ApiConnector.login(data, function (response) {
-    console.log(response);
-
     if (response.success) {
       location.reload();
     } else {
-      console.error("Error: " + response.error);
-      alert("Error: " + response.error);
+      userForm.setLoginErrorMessage(response.error);
     }
   });
 };
 
-myUserForm.registerFormCallback = (data) => {
-  ApiConnector.register(data, function (response) {
-    console.log(response);
+//Форма для регистрации
 
+userForm.registerFormCallback = (data) => {
+  ApiConnector.register(data, function (response) {
     if (response.success) {
       location.reload();
     } else {
-      console.error("Error: " + response.error);
-      alert("Error: " + response.error);
+      userForm.setRegisterErrorMessage(response.error);
     }
   });
 };
